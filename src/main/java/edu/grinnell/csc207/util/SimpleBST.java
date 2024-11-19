@@ -89,7 +89,38 @@ public class SimpleBST<K, V> implements SimpleMap<K, V> {
    */
   @Override
   public V set(K key, V value) {
-    return null;        // STUB
+    if (this.root == null) {
+      this.root = new BSTNode<K,V>(key, value);
+      this.size++;
+      return null;
+    } else {
+      BSTNode<K, V> current = this.root;
+
+      while (true) {
+        int compare = this.order.compare(current.key, key);
+        if (compare == 0){
+          V dummy = current.value;
+          current.value = value;
+          return dummy;
+        } else if(compare < 0){
+          if(current.left != null){
+            current = current.left;
+          } else{
+            current.left = new BSTNode<K,V>(key, value);
+            this.size++;
+            return null;
+          }
+        } else{
+          if(current.right != null){
+            current = current.right;
+          } else{
+            current.right = new BSTNode<K,V>(key, value);
+            this.size++;
+            return null;
+          }
+        }
+      }
+    }
   } // set(K, V)
 
   /**
@@ -235,7 +266,7 @@ public class SimpleBST<K, V> implements SimpleMap<K, V> {
    * Dump a portion of the tree to some output location.
    *
    * @param pen
-   *   The PrintWriter used to dump the subtree.
+   *   The PrintWriter // STUBused to dump the subtree.
    * @param node
    *   The root of the subtree.
    * @param indent
