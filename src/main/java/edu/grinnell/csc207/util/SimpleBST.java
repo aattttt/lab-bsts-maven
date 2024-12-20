@@ -318,6 +318,14 @@ public class SimpleBST<K, V> implements SimpleMap<K, V> {
    * other iterators.)
    *
    * @return an iterator for all of the other nodes.
+   * 
+   * What I have to do 
+   * 
+   * 
+   * Pop the node at the top of the stack.
+     If the right child is not null, push the right child.
+     If the left child is not null, push the left child.
+     Return the node.
    */
   Iterator<BSTNode<K, V>> nodes() {
     return new Iterator<BSTNode<K, V>>() {
@@ -334,8 +342,17 @@ public class SimpleBST<K, V> implements SimpleMap<K, V> {
       @Override
       public BSTNode<K, V> next() {
         checkInit();
-        // STUB
-        return null;
+        if (!this.hasNext()) {
+          throw new NoSuchElementException("no elements remain");
+        } // if no elements
+        BSTNode<K, V> reslut = stack().pop;
+        if(result.right != null) {
+          stack.push(result.right);
+        } // if
+        if(result.left != null) {
+          stack.push(result.left);
+        } // if
+        return result;
       } // next();
 
       void checkInit() {
